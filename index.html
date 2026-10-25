@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Canlı Altyazı</title>
+  <meta name="description" content="İngilizce konuşmayı canlı olarak yazıya döküp Türkçeye çevirir.">
+  <meta name="theme-color" content="#FFF0F6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1E0C16" media="(prefers-color-scheme: dark)">
+
+  <!-- iPhone'da "Ana Ekrana Ekle" ile uygulama gibi açılması için -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Altyazı">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="titles">
+        <h1>Canlı Altyazı <span class="heart" aria-hidden="true">♥</span></h1>
+        <p class="subtitle">İngilizce → Türkçe</p>
+      </div>
+      <div class="indicator" id="indicator" aria-live="polite">
+        <span class="dot"></span><span class="label">HAZIR</span>
+      </div>
+      <button class="icon-btn" id="clearBtn" aria-label="Altyazıları temizle" disabled>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M9 3h6l1 2h4v2H4V5h4l1-2Zm-3 6h12l-1 12H7L6 9Zm4 2v8h2v-8h-2Zm4 0v8h2v-8h-2Z"/></svg>
+      </button>
+    </header>
+
+    <div class="banner" id="banner" hidden></div>
+
+    <main class="list" id="list">
+      <div class="empty" id="empty">
+        <div class="empty-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="44" height="44"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm2 5v2h5V9H6Zm7 0v2h5V9h-5Zm-7 4v2h3v-2H6Zm5 0v2h7v-2h-7Z"/></svg>
+        </div>
+        <h2 id="emptyTitle">Henüz altyazı yok</h2>
+        <p id="emptyText">Başlamak için mikrofon düğmesine dokunun.</p>
+      </div>
+    </main>
+
+    <footer class="controls">
+      <button class="record" id="recordBtn" aria-label="Kaydı başlat">
+        <span class="ring" aria-hidden="true"></span>
+        <span class="core" aria-hidden="true">
+          <svg class="mic" viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2Z"/></svg>
+          <svg class="stop" viewBox="0 0 24 24" width="26" height="26"><rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor"/></svg>
+        </span>
+      </button>
+      <p class="hint" id="hint">Başlatmak için dokunun</p>
+      <p class="provider" id="provider" hidden></p>
+    </footer>
+  </div>
+
+  <div class="dialog-backdrop" id="dialog" hidden>
+    <div class="dialog" role="alertdialog" aria-labelledby="dialogTitle" aria-describedby="dialogText">
+      <h3 id="dialogTitle"></h3>
+      <p id="dialogText"></p>
+      <button id="dialogOk">Tamam</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

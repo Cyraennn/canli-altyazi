@@ -1,0 +1,198 @@
+/* Pembe tema: iOS sürümündeki Theme.swift ile aynı renkler. */
+:root {
+  --pink: #F0559A;
+  --raspberry: #D12C7A;
+  --blush: #FFE3EF;
+  --bg-top: #FFF0F6;
+  --bg-bottom: #FFD9E8;
+  --card: #FFFFFF;
+  --text: #4A1230;
+  --text-2: #9C4A72;
+  --bar: rgba(255, 240, 246, 0.78);
+  --danger: #D32F4F;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pink: #FF7AB6;
+    --raspberry: #F0559A;
+    --blush: #4A1E36;
+    --bg-top: #1E0C16;
+    --bg-bottom: #2E1222;
+    --card: #3A1A2C;
+    --text: #FFF0F6;
+    --text-2: #F5B8D4;
+    --bar: rgba(30, 12, 22, 0.78);
+    --danger: #FF6B87;
+  }
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: linear-gradient(var(--bg-top), var(--bg-bottom)) fixed;
+  background-color: var(--bg-top);
+  overscroll-behavior: none;
+}
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* Başlık */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: calc(env(safe-area-inset-top) + 12px) 16px 12px;
+}
+.titles { flex: 1; min-width: 0; }
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--pink), var(--raspberry));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.heart { font-size: 1rem; color: var(--pink); -webkit-text-fill-color: var(--pink); vertical-align: 2px; }
+.subtitle { margin: 2px 0 0; font-size: .95rem; color: var(--text-2); }
+
+.indicator {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: 999px;
+  background: var(--blush); color: var(--pink);
+  font: 700 .75rem ui-monospace, "SF Mono", Menlo, monospace;
+}
+.indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); opacity: .5; }
+.indicator.live { color: var(--raspberry); }
+.indicator.live .dot { background: var(--raspberry); opacity: 1; animation: blink .8s ease-in-out infinite alternate; }
+@keyframes blink { to { opacity: .25; } }
+
+.icon-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--blush); color: var(--pink);
+}
+.icon-btn:disabled { opacity: .4; cursor: default; }
+
+/* Durum şeridi */
+.banner {
+  padding: 8px 16px;
+  font-size: .85rem; font-weight: 600;
+  color: var(--raspberry);
+  background: color-mix(in srgb, var(--pink) 14%, transparent);
+}
+
+/* Altyazı listesi */
+.list {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.empty {
+  margin: auto; text-align: center; color: var(--pink); padding: 24px;
+}
+.empty h2 { margin: 10px 0 4px; font-size: 1.2rem; }
+.empty p { margin: 0; color: var(--text-2); }
+.empty-icon { opacity: .9; }
+
+.card {
+  display: flex; gap: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--pink) 14%, transparent);
+  animation: pop .18s ease-out;
+}
+.card.active { box-shadow: 0 3px 14px color-mix(in srgb, var(--pink) 30%, transparent); }
+@keyframes pop { from { opacity: 0; transform: translateY(6px); } }
+.bar { width: 4px; flex: none; border-radius: 2px; background: var(--blush); }
+.card.active .bar { background: var(--pink); }
+.texts { min-width: 0; flex: 1; }
+.en {
+  margin: 0;
+  font-size: 1.25rem; font-weight: 600; line-height: 1.3;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.tr {
+  margin: 6px 0 0;
+  font-size: 1.05rem; line-height: 1.35;
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+}
+.tr.provisional { font-style: italic; opacity: .75; }
+.tr.pending { opacity: .6; }
+.note { margin: 6px 0 0; font-size: .8rem; color: var(--raspberry); }
+.note.error { color: var(--danger); }
+
+/* Alt kontrol çubuğu */
+.controls {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 16px calc(env(safe-area-inset-bottom) + 8px);
+  background: var(--bar);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+.record { position: relative; width: 92px; height: 92px; display: grid; place-items: center; }
+.record .core {
+  width: 72px; height: 72px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--pink), var(--raspberry));
+  box-shadow: 0 5px 14px color-mix(in srgb, var(--pink) 45%, transparent);
+  transition: transform .2s, background .3s;
+}
+.record:active .core { transform: scale(.94); }
+.record .ring {
+  position: absolute; inset: 3px; border-radius: 50%;
+  border: 6px solid color-mix(in srgb, var(--pink) 35%, transparent);
+  opacity: 0;
+}
+.record .stop { display: none; }
+.record.on .core { background: var(--raspberry); }
+.record.on .mic { display: none; }
+.record.on .stop { display: block; }
+.record.on .ring { opacity: 1; animation: pulse .9s ease-in-out infinite alternate; }
+@keyframes pulse { from { transform: scale(.96); } to { transform: scale(1.1); } }
+.hint { margin: 0; font-size: .85rem; color: var(--text-2); }
+.provider { margin: 0; font-size: .7rem; color: var(--text-2); opacity: .7; }
+
+/* Uyarı penceresi */
+.dialog-backdrop {
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  padding: 16px;
+  background: rgba(40, 0, 20, .35);
+}
+.dialog-backdrop[hidden] { display: none; }
+.dialog {
+  width: min(340px, 100%);
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--card);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+}
+.dialog h3 { margin: 0 0 8px; color: var(--raspberry); }
+.dialog p { margin: 0 0 16px; color: var(--text); line-height: 1.4; white-space: pre-line; }
+.dialog button {
+  width: 100%; padding: 12px; border-radius: 12px;
+  color: #fff; font-weight: 700;
+  background: linear-gradient(135deg, var(--pink), var(--raspberry));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
